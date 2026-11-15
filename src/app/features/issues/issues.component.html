@@ -1,0 +1,43 @@
+<section>
+  <a routerLink="/" class="muted">← Back to projects</a>
+  <h1>Issues</h1>
+
+  <form *appHasPermission="'issue:create'" class="inline" (ngSubmit)="add()">
+    <div class="field">
+      <label for="title">New issue</label>
+      <input id="title" [formControl]="titleControl" />
+    </div>
+    <button type="submit" class="primary" [disabled]="adding()">Add issue</button>
+  </form>
+
+  @if (service.loading()) {
+    <p role="status">Loading issues…</p>
+  }
+  @if (service.error(); as err) {
+    <p class="form-error" role="alert">{{ err }}</p>
+  }
+
+  <ul class="issues">
+    @for (issue of service.issues(); track issue.id) {
+      <li class="card row between">
+        <span>{{ issue.title }}</span>
+        @if (auth.can('issue:update')) {
+          <label>
+            <span class="sr-only">Status for {{ issue.title }}</span>
+            <select (change)="changeStatus(issue.id, $any($event.target).value)">
+              @for (s of statuses; track s) {
+                <option [value]="s" [selected]="s === issue.status">{{ s }}</option>
+              }
+            </select>
+          </label>
+        } @else {
+          <span class="badge">{{ issue.status }}</span>
+        }
+      </li>
+    } @empty {
+      @if (!service.loading()) {
+        <li class="muted">No issues yet.</li>
+      }
+    }
+  </ul>
+</section>

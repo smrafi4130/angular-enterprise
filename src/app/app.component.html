@@ -1,0 +1,15 @@
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar">
+  <nav class="row">
+    <a routerLink="/" class="brand">Issue Tracker</a>
+  </nav>
+  <div class="row">
+    @if (auth.user(); as user) {
+      <span class="muted">{{ user.name }} · <span class="badge">{{ user.role }}</span></span>
+      <button (click)="auth.logout()">Sign out</button>
+    }
+  </div>
+</header>
+<main id="main" class="container">
+  <router-outlet />
+</main>
