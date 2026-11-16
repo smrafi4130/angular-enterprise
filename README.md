@@ -1,5 +1,7 @@
 # Angular Enterprise — Issue Tracker
 
+[![CI](https://github.com/smrafi4130/angular-enterprise/actions/workflows/ci.yml/badge.svg)](https://github.com/smrafi4130/angular-enterprise/actions/workflows/ci.yml)
+
 A production-shaped Angular 19 application: an internal project/issue tracker with role-based access, built with **standalone components, signals, RxJS, typed reactive forms, functional guards and interceptors, lazy-loaded routes** and a mock backend so it runs with no server.
 
 | Projects | Issues (manager) |
